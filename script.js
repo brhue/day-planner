@@ -9,6 +9,14 @@ let hours = [9, 10, 11, 12, 13, 14, 15, 16, 17].map(hour => {
   return today.plus({hours: hour});
 });
 
+let dayPlansData = localStorage.getItem('plans');
+
+if (!dayPlansData) {
+  dayPlansData = {};
+} else {
+  dayPlansData = JSON.parse(dayPlansData);
+}
+
 currentDayEl.text(now.toLocaleString(luxon.DateTime.DATE_HUGE));
 
 hours.forEach(hour => {
@@ -35,9 +43,12 @@ function createRow(hour, when) {
   timeCol.append(hourEl);
 
   let textArea = $('<textarea class="w-100 h-100 ' + when + '">');
+  textArea.attr('data-hour', hour.hour);
+  textArea.text(dayPlansData[hour.hour]);
   inputCol.append(textArea);
 
   let saveBtn = $('<button class="saveBtn w-100 h-100">');
+  saveBtn.attr('data-hour', hour.hour);
   saveCol.append(saveBtn);
 
   let saveIcon = $('<i class="fas fa-save">');
@@ -46,3 +57,10 @@ function createRow(hour, when) {
   row.append(timeCol, inputCol, saveCol);
   containerEl.append(row);
 }
+
+$('.container').on('click', '.saveBtn', function(e) {
+  let hourToSave = $(this).attr('data-hour');
+  let noteToSave = $('textarea[data-hour=' + hourToSave + ']').val()
+  dayPlansData[hourToSave] = noteToSave;
+  localStorage.setItem('plans', JSON.stringify(dayPlansData));
+});
