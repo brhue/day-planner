@@ -6,7 +6,7 @@ This is a simple work day planner that allows you to enter and save events for t
 Clone the repository to your local machine.
 ## Usage
 Open `index.html` in your favorite browser.
-## Creidts
+## Credits
 
 ## License
 MIT
