@@ -25,19 +25,19 @@ hours.forEach(hour => {
 });
 
 function createRow(hour, when) {
-  let row = $('<div class="row">');
-  let timeCol = $('<div class="col">');
-  let inputCol = $('<div class="col">');
+  let row = $('<div class="row no-gutters">');
+  let timeCol = $('<div class="col time-block">');
+  let inputCol = $('<div class="col-10">');
   let saveCol = $('<div class="col">');
 
   let hourEl = $('<p class="hour">');
   hourEl.text(hour.toLocaleString(luxon.DateTime.TIME_SIMPLE));
   timeCol.append(hourEl);
 
-  let textArea = $('<textarea class="' + when + '">');
+  let textArea = $('<textarea class="w-100 h-100 ' + when + '">');
   inputCol.append(textArea);
 
-  let saveBtn = $('<button class="saveBtn">');
+  let saveBtn = $('<button class="saveBtn w-100 h-100">');
   saveCol.append(saveBtn);
 
   let saveIcon = $('<i class="fas fa-save">');
