@@ -32,6 +32,14 @@ hours.forEach(hour => {
   createRow(hour, whenInTime);
 });
 
+$('.container').on('click', '.saveBtn', function(e) {
+  let hourToSave = $(this).attr('data-hour');
+  let noteToSave = $('textarea[data-hour=' + hourToSave + ']').val()
+  dayPlansData[hourToSave] = noteToSave;
+  localStorage.setItem('plans', JSON.stringify(dayPlansData));
+});
+
+// FUNCTIONS
 function createRow(hour, when) {
   let row = $('<div class="row no-gutters">');
   let timeCol = $('<div class="col time-block">');
@@ -57,10 +65,3 @@ function createRow(hour, when) {
   row.append(timeCol, inputCol, saveCol);
   containerEl.append(row);
 }
-
-$('.container').on('click', '.saveBtn', function(e) {
-  let hourToSave = $(this).attr('data-hour');
-  let noteToSave = $('textarea[data-hour=' + hourToSave + ']').val()
-  dayPlansData[hourToSave] = noteToSave;
-  localStorage.setItem('plans', JSON.stringify(dayPlansData));
-});
